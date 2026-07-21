@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Voice-Controlled Data Assistant</title>
+<script src="https://cdn.jsdelivr.net/npm/livekit-client/dist/livekit-client.umd.min.js"></script>
+<style>
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    max-width: 480px;
+    margin: 60px auto;
+    padding: 0 20px;
+    color: #1a1a1a;
+  }
+  h1 { font-size: 20px; margin-bottom: 4px; }
+  p.sub { color: #666; margin-top: 0; font-size: 14px; }
+  label { display: block; font-size: 13px; font-weight: 600; margin-top: 20px; margin-bottom: 6px; }
+  input[type=text] {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+  }
+  button {
+    margin-top: 20px;
+    padding: 12px 20px;
+    font-size: 15px;
+    font-weight: 600;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    width: 100%;
+  }
+  #connectBtn { background: #111; color: white; }
+  #connectBtn.connected { background: #b3261e; }
+  #connectBtn:disabled { background: #999; cursor: not-allowed; }
+  #status {
+    margin-top: 16px;
+    font-size: 13px;
+    padding: 10px 12px;
+    border-radius: 6px;
+    background: #f2f2f2;
+    color: #333;
+    min-height: 18px;
+  }
+  #status.error { background: #fdecea; color: #b3261e; }
+  #status.live { background: #eaf7ee; color: #1e7a34; }
+  .hint { font-size: 12px; color: #888; margin-top: 24px; line-height: 1.5; }
+  .hint code { background: #f2f2f2; padding: 1px 5px; border-radius: 4px; }
+</style>
+</head>
+<body>
+
+<h1>Voice-Controlled Data Assistant</h1>
+<p class="sub">Ask natural language questions about the Goodreads book graph through your LiveKit agent worker.</p>
+
+<label for="sandboxId">Token server sandbox ID</label>
+<input type="text" id="sandboxId" placeholder="token-server-xxxxxx">
+
+<label for="agentName">Agent name (optional, leave blank for automatic dispatch)</label>
+<input type="text" id="agentName" placeholder="">
+
+<button id="connectBtn">Start Call</button>
+
+<div id="status">Not connected.</div>
+
+<audio id="remoteAudio" autoplay></audio>
+
+<div class="hint">
+  Find your sandbox ID under <b>Settings &rarr; Token server</b> in the LiveKit Cloud dashboard
+  (<code>cloud.livekit.io/projects/p_/settings/project</code>). It looks like <code>token-server-xxxxxx</code>.
+  Your <code>agent_core.py</code> worker must already be running (<code>await main_worker()</code> in your notebook)
+  for the call to be picked up.
+</div>
+
+<script>
+const { Room, TokenSource, RoomEvent, Track } = LivekitClient;
+
+const sandboxInput = document.getElementById('sandboxId');
+const agentInput = document.getElementById('agentName');
+const connectBtn = document.getElementById('connectBtn');
+const statusEl = document.getElementById('status');
+const remoteAudio = document.getElementById('remoteAudio');
+
+// Remember the sandbox ID between visits, since this file lives on your machine
+sandboxInput.value = localStorage.getItem('lk_sandbox_id') || '';
+agentInput.value = localStorage.getItem('lk_agent_name') || '';
+
+let room = null;
+let connected = false;
+
+function setStatus(text, kind) {
+  statusEl.textContent = text;
+  statusEl.className = kind || '';
+}
+
+async function connect() {
+  const sandboxId = sandboxInput.value.trim();
+  const agentName = agentInput.value.trim();
+
+  if (!sandboxId) {
+    setStatus('Enter your token server sandbox ID first.', 'error');
+    return;
+  }
+
+  localStorage.setItem('lk_sandbox_id', sandboxId);
+  localStorage.setItem('lk_agent_name', agentName);
+
+  connectBtn.disabled = true;
+  setStatus('Requesting a token...');
+
+  try {
+    const tokenSource = TokenSource.sandboxTokenServer(sandboxId);
+    const roomName = 'voice-controlled-' + Math.random().toString(36).slice(2, 10);
+
+    const fetchOptions = { roomName };
+    if (agentName) fetchOptions.agentName = agentName;
+
+    const { serverUrl, participantToken } = await tokenSource.fetch(fetchOptions);
+
+    room = new Room();
+
+    room.on(RoomEvent.TrackSubscribed, (track) => {
+      if (track.kind === Track.Kind.Audio) {
+        track.attach(remoteAudio);
+      }
+    });
+
+    room.on(RoomEvent.Disconnected, () => {
+      setStatus('Disconnected.');
+      connectBtn.textContent = 'Start Call';
+      connectBtn.classList.remove('connected');
+      connectBtn.disabled = false;
+      connected = false;
+    });
+
+    setStatus('Connecting to the room...');
+    await room.connect(serverUrl, participantToken);
+
+    setStatus('Enabling microphone...');
+    await room.localParticipant.setMicrophoneEnabled(true);
+
+    setStatus('Connected. Connected. Listening — ask a question about the book graph.', 'live');
+    connectBtn.textContent = 'End Call';
+    connectBtn.classList.add('connected');
+    connectBtn.disabled = false;
+    connected = true;
+  } catch (err) {
+    console.error(err);
+    setStatus('Error: ' + (err && err.message ? err.message : String(err)), 'error');
+    connectBtn.disabled = false;
+  }
+}
+
+async function disconnect() {
+  if (room) {
+    await room.disconnect();
+    room = null;
+  }
+}
+
+connectBtn.addEventListener('click', () => {
+  if (connected) {
+    disconnect();
+  } else {
+    connect();
+  }
+});
+</script>
+
+</body>
+</html>
