@@ -142,7 +142,7 @@ async function connect() {
     setStatus('Enabling microphone...');
     await room.localParticipant.setMicrophoneEnabled(true);
 
-    setStatus('Connected. Connected. Listening — ask a question about the book graph.', 'live');
+    setStatus('Connected. Listening — ask a question about the book graph.', 'live');
     connectBtn.textContent = 'End Call';
     connectBtn.classList.add('connected');
     connectBtn.disabled = false;
