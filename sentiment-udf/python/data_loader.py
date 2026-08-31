@@ -5,7 +5,7 @@ from neo4j import GraphDatabase
 from tqdm import tqdm
 
 URI      = "bolt://localhost:7687"
-AUTH     = ("neo4j", "timmythecat")
+AUTH     = ("neo4j", "your_password_here")
 TICK_CSV = "fictitious_stocks.csv"
 RAW_CSV  = "raw_fictitious_headlines.csv"
 
