@@ -6,6 +6,9 @@ Cargo.lock
 neo4j-wasm-udf/target/
 *.class
 
+# Wasm build artifacts
+*.wasm
+
 # macOS
 .DS_Store
 
