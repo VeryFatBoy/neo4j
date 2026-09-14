@@ -54,8 +54,6 @@ Replace `<your-dbms-id>` throughout with the UUID of your Neo4j Desktop database
 ls ~/Library/Application\ Support/neo4j-desktop/Application/Data/dbmss/
 ```
 
----
-
 ### Prerequisites
 
 1. Confirm Java 21:
@@ -103,8 +101,6 @@ Expected: `wit-bindgen-cli 0.59.0`
 git clone https://github.com/VeryFatBoy/wasm-udf.git
 cd wasm-udf
 ```
-
----
 
 ### Case 1: Integer Addition
 
@@ -161,8 +157,6 @@ Expected: `"com.example.wasm.add"`
 RETURN com.example.wasm.add(7, 35) AS result;
 ```
 Expected: `42`
-
----
 
 ### Case 2: Single Compound Score
 
@@ -240,8 +234,6 @@ Expected: `0.624893307685852`
 RETURN com.example.wasm.sentiment('The movie was GREAT!') AS score;
 ```
 Expected: `0.7290259003639221`
-
----
 
 ### Case 3: Full Polarity Map
 
