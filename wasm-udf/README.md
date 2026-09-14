@@ -127,13 +127,12 @@ Expected: no output, clean build. JAR is around 23MB.
 12. Copy the JAR to the plugins folder:
 ```bash
 cp target/neo4j-wasm-udf-1.0-SNAPSHOT.jar \
-  $NEO4J_HOME/plugins/
+  ~/Library/Application\ Support/neo4j-desktop/Application/Data/dbmss/<your-dbms-id>/plugins/
 ```
 `NEO4J_HOME` refers to the root directory of your Neo4j installation.
 
 - On Linux the plugins folder is typically under `$NEO4J_HOME/plugins/`.
 - On Windows the plugins folder is typically under `%NEO4J_HOME%\plugins\`.
-- On macOS the plugins folder is under `~/Library/Application Support/neo4j-desktop/Application/Data/dbmss/<your-dbms-id>/plugins/`.
 
 13. Edit `neo4j.conf` manually and add exactly one line:
 ```
@@ -143,7 +142,7 @@ File location: `~/Library/Application Support/neo4j-desktop/Application/Data/dbm
 
 14. Restart Neo4j in Desktop.
 
-15. Open Neo4j Browser at `http://localhost:7474` and confirm the function registered:
+15. Restart Neo4j, select **Query** in the left-hand navigation pane and connect to an instance. Confirm that the function registered correctly:
 ```cypher
 SHOW FUNCTIONS
 YIELD name
