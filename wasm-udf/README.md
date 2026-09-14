@@ -133,7 +133,7 @@ Expected: no output, clean build. JAR is around 23MB.
 cp target/neo4j-wasm-udf-1.0-SNAPSHOT.jar \
   $NEO4J_HOME/plugins/
 ```
-On Linux the plugins folder is typically under `$NEO4J_HOME/plugins/`. On Windows the plugins folder is typically under `%NEO4J_HOME%\plugins\`. `NEO4J_HOME` refers to the root directory of your Neo4j installation; on macOS with Neo4j Desktop this is the dbms directory shown above.
+On Linux the plugins folder is typically under `$NEO4J_HOME/plugins/`. On Windows the plugins folder is typically under `%NEO4J_HOME%\plugins\`. `NEO4J_HOME` refers to the root directory of your Neo4j installation; on macOS with Neo4j Desktop the plugins folder is under `~/Library/Application Support/neo4j-desktop/Application/Data/dbmss/<your-dbms-id>/plugins/`.
 
 13. Edit `neo4j.conf` manually and add exactly one line:
 ```
