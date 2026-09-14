@@ -1,0 +1,12 @@
+[package]
+name = "sentimentable"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+wit-bindgen = "0.40.0"
+vader_sentiment = "0.1.1"
+lazy_static = "1.4.0"
+
+[lib]
+crate-type = ["cdylib"]

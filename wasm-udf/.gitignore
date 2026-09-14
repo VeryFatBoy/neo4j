@@ -1,0 +1,15 @@
+# Rust
+target/
+Cargo.lock
+
+# Maven
+neo4j-wasm-udf/target/
+*.class
+
+# macOS
+.DS_Store
+
+# IDE
+.idea/
+*.iml
+.vscode/

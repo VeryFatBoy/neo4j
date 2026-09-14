@@ -1,0 +1,5 @@
+package local:sentimentable;
+
+world sentimentable {
+    export sentimentable: func(input: string) -> tuple<f32, f32, f32, f32>;
+}
