@@ -98,8 +98,12 @@ Expected: `wit-bindgen-cli 0.59.0`
 
 7. Clone and navigate into the repo:
 ```bash
-git clone https://github.com/VeryFatBoy/wasm-udf.git
-cd wasm-udf
+cd ~
+git clone --filter=blob:none --sparse https://github.com/VeryFatBoy/neo4j.git
+cd neo4j
+git sparse-checkout set wasm-udf
+mv wasm-udf ../wasm-udf
+cd ../wasm-udf
 ```
 
 ### Case 1: Integer Addition
@@ -138,7 +142,7 @@ cp target/neo4j-wasm-udf-1.0-SNAPSHOT.jar \
 ```
 dbms.security.procedures.allowlist=com.example.wasm.*
 ```
-File location: `~/Library/Application Support/neo4j-desktop/Application/Data/dbmss/<your-dbms-id>/conf/neo4j.conf`
+File location: `~/Library/Application\ Support/neo4j-desktop/Application/Data/dbmss/<your-dbms-id>/conf/neo4j.conf`
 
 14. Restart Neo4j in Desktop.
 
@@ -157,7 +161,9 @@ RETURN com.example.wasm.add(7, 35) AS result;
 ```
 Expected: `42`
 
-### Case 2: Single Compound Score
+### Case 2 and Case 3: Sentiment Analysis
+
+Case 2 (single compound score) is covered in the article as a stepping stone toward Case 3. The repo contains the final Case 3 implementation -- the full polarity map returning compound, positive, negative and neutral scores.
 
 17. Navigate to the Rust crate and build the Wasm binary:
 ```bash
@@ -184,15 +190,14 @@ wasm-objdump -x target/wasm32-wasip1/release/sentimentable.wasm | grep "^Export"
 ```
 Expected: `memory`, `sentimentable`, `cabi_realloc`, `cabi_realloc_wit_bindgen_0_40_0`
 
-21. Find the function's sig index:
+21. Find the sig index for `sentimentable` and look up the type (replace N with the sig index):
 ```bash
-wasm-objdump -x target/wasm32-wasip1/release/sentimentable.wasm | grep "func\[8\]" | head -1
+wasm-objdump -x target/wasm32-wasip1/release/sentimentable.wasm | grep "func\[9\]" | head -1
 ```
-Note the `sig=N` value, then look up the type (replace N with the sig index):
 ```bash
 wasm-objdump -x target/wasm32-wasip1/release/sentimentable.wasm | grep "type\[N\]"
 ```
-Expected: `(i32, i32) -> f32`
+Expected: `(i32, i32) -> i32` -- a tuple return uses a result pointer rather than a direct return value
 
 22. Copy the Wasm binary to Maven resources:
 ```bash
@@ -210,7 +215,7 @@ ls -lh ~/wasm-udf/neo4j-wasm-udf/src/main/resources/sentimentable.wasm
 cd ~/wasm-udf/neo4j-wasm-udf
 mvn -q clean package
 cp target/neo4j-wasm-udf-1.0-SNAPSHOT.jar \
-  $NEO4J_HOME/plugins/
+  ~/Library/Application\ Support/neo4j-desktop/Application/Data/dbmss/<your-dbms-id>/plugins/
 ```
 
 25. Stop Neo4j, restart it, then confirm both functions are registered:
@@ -222,62 +227,7 @@ RETURN name;
 ```
 Expected: `"com.example.wasm.add"` and `"com.example.wasm.sentiment"`
 
-26. Test compound score:
-```cypher
-RETURN com.example.wasm.sentiment('The movie was great') AS score;
-```
-Expected: `0.624893307685852`
-
-27. Test capitalization sensitivity:
-```cypher
-RETURN com.example.wasm.sentiment('The movie was GREAT!') AS score;
-```
-Expected: `0.7290259003639221`
-
-### Case 3: Full Polarity Map
-
-28. The `sentimentable.wit` file is already updated in the repo for the tuple return. Navigate to the Rust crate and rebuild:
-```bash
-cd ~/wasm-udf/sentimentable
-cargo build --target wasm32-wasip1 --release
-```
-Expected: `Finished release profile`
-
-29. Confirm exports unchanged:
-```bash
-wasm-objdump -x target/wasm32-wasip1/release/sentimentable.wasm | grep "^Export" -A 6
-```
-Expected: same four exports as Case 2
-
-30. Find the sig index for func[9] and look up the type (replace N with the sig index):
-```bash
-wasm-objdump -x target/wasm32-wasip1/release/sentimentable.wasm | grep "func\[9\]" | head -1
-```
-```bash
-wasm-objdump -x target/wasm32-wasip1/release/sentimentable.wasm | grep "type\[N\]"
-```
-Expected: `(i32, i32) -> i32` -- differs from Case 2; a tuple return uses a result pointer rather than a direct return value
-
-31. Copy the updated Wasm binary:
-```bash
-cp target/wasm32-wasip1/release/sentimentable.wasm \
-   ~/wasm-udf/neo4j-wasm-udf/src/main/resources/
-```
-
-32. Confirm the timestamp is current:
-```bash
-ls -lh ~/wasm-udf/neo4j-wasm-udf/src/main/resources/sentimentable.wasm
-```
-
-33. Rebuild and deploy:
-```bash
-cd ~/wasm-udf/neo4j-wasm-udf
-mvn -q clean package
-cp target/neo4j-wasm-udf-1.0-SNAPSHOT.jar \
-  $NEO4J_HOME/plugins/
-```
-
-34. Stop Neo4j, restart it, then test full polarity map:
+26. Test full polarity map:
 ```cypher
 RETURN com.example.wasm.sentiment('The movie was great') AS scores;
 ```
@@ -291,7 +241,7 @@ Expected:
 }
 ```
 
-35. Test capitalization:
+27. Test capitalization:
 ```cypher
 RETURN com.example.wasm.sentiment('The movie was GREAT!') AS scores;
 ```
@@ -305,7 +255,7 @@ Expected:
 }
 ```
 
-36. Test empty string guard:
+28. Test empty string guard:
 ```cypher
 RETURN com.example.wasm.sentiment('') AS scores;
 ```
