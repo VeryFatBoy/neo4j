@@ -1,6 +1,6 @@
 # wasm-udf
 
-Source code for the DZone article [Wasm Inside Neo4j: Building the Example That Didn't Exist](https://dzone.com/articles/wasm-inside-neo4j).
+Source code for the DZone article [Wasm Inside Neo4j: Building the Example That Didn't Exist](TBD).
 
 This repo demonstrates embedding a `wasmtime` Wasm runtime inside a Neo4j Java UDF using `wasmtime-java`. A Rust function compiled to WebAssembly rides inside the plugin JAR alongside the Java code, callable directly from Cypher.
 
@@ -133,7 +133,11 @@ Expected: no output, clean build. JAR is around 23MB.
 cp target/neo4j-wasm-udf-1.0-SNAPSHOT.jar \
   $NEO4J_HOME/plugins/
 ```
-On Linux the plugins folder is typically under `$NEO4J_HOME/plugins/`. On Windows the plugins folder is typically under `%NEO4J_HOME%\plugins\`. `NEO4J_HOME` refers to the root directory of your Neo4j installation; on macOS with Neo4j Desktop the plugins folder is under `~/Library/Application Support/neo4j-desktop/Application/Data/dbmss/<your-dbms-id>/plugins/`.
+`NEO4J_HOME` refers to the root directory of your Neo4j installation.
+
+- On Linux the plugins folder is typically under `$NEO4J_HOME/plugins/`.
+- On Windows the plugins folder is typically under `%NEO4J_HOME%\plugins\`.
+- On macOS the plugins folder is under `~/Library/Application Support/neo4j-desktop/Application/Data/dbmss/<your-dbms-id>/plugins/`.
 
 13. Edit `neo4j.conf` manually and add exactly one line:
 ```
