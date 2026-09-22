@@ -23,9 +23,7 @@ wasm-udf/
             │       ├── WasmUDF.java
             │       └── SentimentUDF.java
             └── resources/
-                ├── add.wat
-                ├── add.wasm
-                └── sentimentable.wasm
+                └── add.wat
 ```
 
 ## Version Summary
