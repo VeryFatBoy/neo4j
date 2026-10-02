@@ -1,0 +1,6 @@
+city,is_capital,is_coastal
+London,true,false
+Paris,true,false
+Berlin,true,false
+Tokyo,true,true
+New York,false,true

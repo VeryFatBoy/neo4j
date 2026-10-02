@@ -1,0 +1,7 @@
+[
+  {"city": "London", "country": "UK", "population": 9648110},
+  {"city": "Paris", "country": "France", "population": 2161000},
+  {"city": "Berlin", "country": "Germany", "population": 3645000},
+  {"city": "Tokyo", "country": "Japan", "population": 13960000},
+  {"city": "New York", "country": "USA", "population": 8336817}
+]
