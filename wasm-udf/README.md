@@ -1,6 +1,6 @@
 # wasm-udf
 
-Source code for the DZone article [Wasm Inside Neo4j: Building the Example That Didn't Exist]([TBD](https://dzone.com/articles/wasm-inside-neo4j)).
+Source code for the DZone article [Wasm Inside Neo4j: Building the Example That Didn't Exist](https://dzone.com/articles/wasm-inside-neo4j).
 
 This repo demonstrates embedding a `wasmtime` Wasm runtime inside a Neo4j Java UDF using `wasmtime-java`. A Rust function compiled to WebAssembly rides inside the plugin JAR alongside the Java code, callable directly from Cypher.
 
