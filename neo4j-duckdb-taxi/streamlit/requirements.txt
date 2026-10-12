@@ -1,0 +1,5 @@
+folium==0.19.5
+neo4j==6.1.0
+pandas==2.2.3
+plotly==5.24.1
+streamlit==1.40.2
