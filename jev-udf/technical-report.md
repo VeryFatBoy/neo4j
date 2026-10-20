@@ -1,4 +1,4 @@
-# Running TypeSafe AI's Jev Inside Neo4j for Calibrated Sentiment Decisions
+# Running TypeSafe AI's Jev Inside Neo4j for Confidence-Aware Sentiment Decisions
 
 This is Part 3 of a series on running sentiment analysis inside Neo4j.
 
