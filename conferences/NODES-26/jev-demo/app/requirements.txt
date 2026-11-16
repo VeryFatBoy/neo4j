@@ -1,0 +1,6 @@
+neo4j==6.4.1
+pandas==3.1.0
+plotly==7.1.0
+pydeck==0.9.3
+PyYAML==6.0.3
+streamlit==1.66.1

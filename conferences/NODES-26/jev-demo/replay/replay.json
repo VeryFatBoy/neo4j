@@ -1,0 +1,173 @@
+{
+  "All stations clear. | All stations clear.": {
+    "choice": "Charing Cross",
+    "confidence": 0.74,
+    "probabilities": {
+      "Charing Cross": 0.87,
+      "Bank": 0.13
+    },
+    "margin": 0.74,
+    "ms": 179,
+    "mode": "hosted",
+    "recorded_with": "jev-1.13.0"
+  },
+  "Suspended: Warren Street. | All stations clear.": {
+    "choice": "Bank",
+    "confidence": 0.9,
+    "probabilities": {
+      "Charing Cross": 0.05,
+      "Bank": 0.95
+    },
+    "margin": 0.8999999999999999,
+    "ms": 147,
+    "mode": "hosted",
+    "recorded_with": "jev-1.13.0"
+  },
+  "Delays: Goodge Street (5 min). | All stations clear.": {
+    "choice": "Bank",
+    "confidence": 0.86,
+    "probabilities": {
+      "Charing Cross": 0.07,
+      "Bank": 0.93
+    },
+    "margin": 0.8600000000000001,
+    "ms": 204,
+    "mode": "hosted",
+    "recorded_with": "jev-1.13.0"
+  },
+  "Suspended: Goodge Street, Warren Street. | All stations clear.": {
+    "choice": "Bank",
+    "confidence": 0.92,
+    "probabilities": {
+      "Charing Cross": 0.04,
+      "Bank": 0.96
+    },
+    "margin": 0.9199999999999999,
+    "ms": 143,
+    "mode": "hosted",
+    "recorded_with": "jev-1.13.0"
+  },
+  "v2 | Kennington > Euston | Northern | Via Waterloo: Suspended: Goodge Street. | Via Elephant and Castle: Suspended: Angel.": {
+    "choice": "Via Waterloo",
+    "probabilities": {
+      "Via Waterloo": 0.52,
+      "Via Elephant and Castle": 0.48
+    },
+    "ms": 146,
+    "recorded_with": "jev-1.13.0"
+  },
+  "v2 | Kennington > Euston | Northern | Via Waterloo: All stations clear. | Via Elephant and Castle: All stations clear.": {
+    "choice": "Via Waterloo",
+    "probabilities": {
+      "Via Waterloo": 0.56,
+      "Via Elephant and Castle": 0.44
+    },
+    "ms": 169,
+    "recorded_with": "jev-1.13.0"
+  },
+  "v2 | Kennington > Euston | Northern | Via Waterloo: Delays: Goodge Street (5 min). | Via Elephant and Castle: All stations clear.": {
+    "choice": "Via Elephant and Castle",
+    "probabilities": {
+      "Via Waterloo": 0.01,
+      "Via Elephant and Castle": 0.99
+    },
+    "ms": 205,
+    "recorded_with": "jev-1.13.0"
+  },
+  "v2 | Kennington > Euston | Northern | Via Waterloo: Suspended: Goodge Street. | Via Elephant and Castle: All stations clear.": {
+    "choice": "Via Elephant and Castle",
+    "probabilities": {
+      "Via Waterloo": 0.01,
+      "Via Elephant and Castle": 0.99
+    },
+    "ms": 169,
+    "recorded_with": "jev-1.13.0"
+  },
+  "v2 | Kennington > Euston | all lines | Via Waterloo: All stations clear. | Via Elephant and Castle: All stations clear.": {
+    "choice": "Via Waterloo",
+    "probabilities": {
+      "Via Waterloo": 0.6,
+      "Via Elephant and Castle": 0.4
+    },
+    "ms": 253,
+    "recorded_with": "jev-1.13.0"
+  },
+  "v2 | Kennington > Euston | all lines | Via Waterloo: Delays: Goodge Street (5 min). | Via Elephant and Castle: All stations clear.": {
+    "choice": "Via Elephant and Castle",
+    "probabilities": {
+      "Via Waterloo": 0.01,
+      "Via Elephant and Castle": 0.99
+    },
+    "ms": 153,
+    "recorded_with": "jev-1.13.0"
+  },
+  "v2 | Kennington > Euston | all lines | Via Waterloo: Suspended: Goodge Street. | Via Elephant and Castle: All stations clear.": {
+    "choice": "Via Elephant and Castle",
+    "probabilities": {
+      "Via Waterloo": 0.01,
+      "Via Elephant and Castle": 0.99
+    },
+    "ms": 146,
+    "recorded_with": "jev-1.13.0"
+  },
+  "v2 | Kennington > Euston | all lines | Via Waterloo: Suspended: Goodge Street. | Via Elephant and Castle: Suspended: Angel.": {
+    "choice": "Via Elephant and Castle",
+    "probabilities": {
+      "Via Waterloo": 0.49,
+      "Via Elephant and Castle": 0.51
+    },
+    "ms": 121,
+    "recorded_with": "jev-1.13.0"
+  },
+  "v2 | Kennington > Euston | all lines | Via Waterloo: Suspended: Goodge Street. Delays: Tottenham Court Road (5 min). | Via Elephant and Castle: Suspended: Angel.": {
+    "choice": "Via Waterloo",
+    "probabilities": {
+      "Via Waterloo": 0.91,
+      "Via Elephant and Castle": 0.09
+    },
+    "ms": 241,
+    "recorded_with": "jev-1.13.0"
+  },
+  "v2 | Kennington > Euston | all lines | Via Embankment: All stations clear. | Via Elephant and Castle: All stations clear. | Via Westminster: All stations clear. | Via Oval: All stations clear.": {
+    "choice": "Via Embankment",
+    "probabilities": {
+      "Via Embankment": 0.4,
+      "Via Oval": 0.14,
+      "Via Elephant and Castle": 0.37,
+      "Via Westminster": 0.09
+    },
+    "ms": 268,
+    "recorded_with": "jev-1.13.0"
+  },
+  "v2 | Kennington > Euston | all lines | Via Embankment: All stations clear. | Via Westminster: All stations clear. | Via Oval: All stations clear.": {
+    "choice": "Via Embankment",
+    "probabilities": {
+      "Via Oval": 0.4,
+      "Via Westminster": 0.05,
+      "Via Embankment": 0.55
+    },
+    "ms": 149,
+    "recorded_with": "jev-1.13.0"
+  },
+  "v2 | Kennington > Euston | all lines | Via Embankment: Suspended: Waterloo. | Via Westminster: Suspended: Waterloo. | Via Oval: All stations clear.": {
+    "choice": "Via Oval",
+    "probabilities": {
+      "Via Oval": 1.0,
+      "Via Westminster": 0.0,
+      "Via Embankment": 0.0
+    },
+    "ms": 221,
+    "recorded_with": "jev-1.13.0"
+  },
+  "v2 | Kennington > Euston | all lines | Via Leicester Square: Delays: Tottenham Court Road (5 min). | Via Westminster: All stations clear. | Via Bank: All stations clear. | Via Piccadilly Circus: All stations clear.": {
+    "choice": "Via Bank",
+    "probabilities": {
+      "Via Leicester Square": 0.06,
+      "Via Bank": 0.48,
+      "Via Westminster": 0.26,
+      "Via Piccadilly Circus": 0.2
+    },
+    "ms": 225,
+    "recorded_with": "jev-1.13.0"
+  }
+}

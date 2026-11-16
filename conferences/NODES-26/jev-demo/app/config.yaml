@@ -1,0 +1,47 @@
+# Transit routing demo: settings. Credentials come from environment variables, not this file.
+app:
+  title: "Transit routing: which route?"
+  low_margin: 0.2          # a decision with a smaller margin than this is flagged as a close call
+  basemap: true            # false: no online map tiles (stations and lines only), for a no-network room
+
+neo4j:
+  uri_env: NEO4J_URI
+  username_env: NEO4J_USERNAME
+  password_env: NEO4J_PASSWORD
+  database_env: NEO4J_DATABASE
+  connect_timeout_s: 8     # seconds to wait for Neo4j before carrying on without it (Python routes, replay decisions)
+
+jev:
+  hosted:
+    model: jev-1.13.0
+    max_retries: 1
+    request_timeout_ms: 8000
+  local:
+    url: http://localhost:11434/v1/systemone
+    model: tev1:4b
+    max_retries: 0
+    request_timeout_ms: 60000
+
+journey:                   # where the app starts; both can be changed in the sidebar
+  origin: Kennington
+  destination: Euston
+  lines: [Northern]        # line names as written in the lines CSV; [] means the whole network
+
+routes:                    # how the graph proposes options (same settings as the Demo 2 notebook)
+  k: 2                     # options Jev chooses between (2 to max_k)
+  max_k: 4
+  pool: 40                 # short routes GDS finds before the distinct ones are kept
+  max_overlap: 0.5         # two routes sharing more than this fraction of stations count as the same
+  interchange_cost: 3      # each interchange counts as this many stops when ranking
+
+gds:
+  graph_name: routes       # name of the in-memory GDS projection (dropped and rebuilt for each journey)
+
+paths:
+  stations: ../data/london_stations.csv
+  connections: ../data/london_connections.csv
+  lines: ../data/london_lines.csv
+  replay: ../replay/replay.json
+
+replay:
+  record: true             # save each live hosted result to the replay file, so replay mode can show it later
