@@ -1,0 +1,11 @@
+# The versions this project was run with (Relate 1.0.0, mcp 2.3.0, hosted jev-1.13.0)
+mcp==2.3.0    # needs 2.x: ask_human uses its input-required mechanism
+pandas==3.1.1
+relate-db==1.0.0
+typesafe-sdk==0.7.5
+
+# For llm_walk.py, install the SDK for the LLM you plug in:
+#   anthropic==2.8.0   for anthropic:<model> (Claude)
+#   openai==3.49.0     for openai:<model> and ollama:<model> (any OpenAI-compatible server)
+# For outside_client.py (a second MCP client):
+#   fastmcp==4.1.8
