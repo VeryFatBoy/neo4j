@@ -1,5 +1,7 @@
 # Jev calibration study
 
+[When Jev Says It's Sure, Is It Right? A Fraud Case Study in Neo4j](https://dzone.com/articles/fraud-detection-confidence-calibration)
+
 When Jev says it's 95% sure, is it right 95% of the time? Three standalone notebooks test that on synthetic fraud data, with Neo4j holding every decision.
 
 | Notebook | What it does |
